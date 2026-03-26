@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shivam Sharma — Portfolio</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+  background: #0a0f1e;
+  color: #e8e8f0;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid #1a2744;
+  background: rgba(8,8,20,0.97);
+}
+.nav-logo {
+  font-size: 20px; font-weight: 900; color: #22d3ee;
+  font-family: Georgia, serif; cursor: pointer; border: none; background: none;
+}
+.nav-links { display: flex; gap: 24px; }
+.nav-btn {
+  background: none; border: none; color: #6b6b88; cursor: pointer;
+  font-family: 'Courier New', monospace; font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase; padding: 4px 0;
+  transition: color 0.2s;
+}
+.nav-btn:hover, .nav-btn.active { color: #22d3ee; }
+section { padding: 88px 48px; }
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding: 120px 48px 80px;
+}
+.hero-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #22d3ee; margin-bottom: 20px; }
+.hero-name {
+  font-family: Georgia, serif;
+  font-size: clamp(56px, 9vw, 112px);
+  font-weight: 900; line-height: 0.92; letter-spacing: -4px; color: #e8e8f0; margin-bottom: 8px;
+}
+.hero-name span { color: #22d3ee; }
+.hero-role { font-size: 13px; color: #6b6b88; font-family: Georgia, serif; font-style: italic; margin-top: 24px; margin-bottom: 12px; }
+.hero-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #6b6b88; margin-bottom: 40px; }
+.hero-meta a { color: #22d3ee; text-decoration: none; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  padding: 12px 28px; font-family: 'Courier New', monospace;
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  border-radius: 2px; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary { background: #22d3ee; color: #0a0f1e; border: 1px solid #22d3ee; font-weight: 700; }
+.btn-primary:hover { background: transparent; color: #22d3ee; }
+.btn-ghost { background: transparent; color: #6b6b88; border: 1px solid #1a2744; }
+.btn-ghost:hover { border-color: #22d3ee; color: #22d3ee; }
+.divider { height: 1px; background: #1a2744; margin: 0 48px; }
+.sec-label {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #22d3ee;
+  margin-bottom: 40px; display: flex; align-items: center; gap: 14px;
+}
+.sec-label::after { content: ''; width: 60px; height: 1px; background: #22d3ee; opacity: 0.4; }
+.sec-title {
+  font-family: Georgia, serif; font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 48px;
+}
+.about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; max-width: 960px; }
+.about-text p { color: #6b6b88; font-size: 13px; margin-bottom: 16px; }
+.about-text strong { color: #e8e8f0; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.stat { background: #0d1526; border: 1px solid #1a2744; padding: 24px 20px; transition: border-color 0.2s; }
+.stat:hover { border-color: #22d3ee; }
+.stat-n { font-family: Georgia, serif; font-size: 38px; font-weight: 900; color: #22d3ee; line-height: 1; margin-bottom: 4px; }
+.stat-l { font-size: 10px; color: #6b6b88; letter-spacing: 1px; text-transform: uppercase; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 2px; }
+.skill {
+  background: #0d1526; border: 1px solid #1a2744; padding: 28px 24px;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.skill::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 0; background: #22d3ee; transition: height 0.3s;
+}
+.skill:hover::before { height: 100%; }
+.skill:hover { border-color: rgba(34,211,238,0.3); }
+.skill-ico { font-size: 20px; margin-bottom: 12px; }
+.skill-n { font-family: Georgia, serif; font-size: 15px; font-weight: 700; color: #e8e8f0; margin-bottom: 7px; }
+.skill-d { font-size: 11px; color: #6b6b88; line-height: 1.6; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.tag {
+  background: rgba(34,211,238,0.07); border: 1px solid rgba(34,211,238,0.2);
+  color: #22d3ee; font-size: 10px; padding: 2px 8px; border-radius: 1px;
+}
+.exp { max-width: 760px; border-left: 1px solid #1a2744; padding-left: 36px; position: relative; }
+.exp::before {
+  content: ''; position: absolute; left: -5px; top: 8px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #22d3ee; box-shadow: 0 0 12px #22d3ee;
+}
+.exp-co { font-family: Georgia, serif; font-size: 22px; font-weight: 900; color: #22d3ee; margin-bottom: 3px; }
+.exp-role { font-size: 13px; color: #e8e8f0; margin-bottom: 3px; }
+.exp-date { font-size: 10px; color: #6b6b88; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.exp-list { list-style: none; }
+.exp-list li {
+  color: #6b6b88; font-size: 12.5px; padding: 8px 0;
+  border-bottom: 1px solid #1a2744; display: flex; gap: 10px; align-items: flex-start;
+}
+.exp-list li:last-child { border-bottom: none; }
+.exp-list li::before { content: '→'; color: #22d3ee; flex-shrink: 0; }
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
+.proj {
+  background: #0d1526; border: 1px solid #1a2744; padding: 32px 28px;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.proj::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, #22d3ee, #0ea5e9);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.proj:hover::after { transform: scaleX(1); }
+.proj:hover { border-color: rgba(34,211,238,0.25); }
+.proj-n-bg { font-family: Georgia, serif; font-size: 52px; font-weight: 900; color: rgba(34,211,238,0.05); line-height: 1; margin-bottom: 12px; letter-spacing: -2px; }
+.proj-n { font-family: Georgia, serif; font-size: 16px; font-weight: 700; color: #e8e8f0; margin-bottom: 9px; }
+.proj-d { font-size: 11.5px; color: #6b6b88; line-height: 1.7; margin-bottom: 16px; }
+.edu-stack { display: flex; flex-direction: column; gap: 2px; max-width: 620px; }
+.edu {
+  background: #0d1526; border: 1px solid #1a2744; padding: 28px 32px;
+  display: flex; gap: 24px; align-items: flex-start; transition: border-color 0.2s;
+}
+.edu:hover { border-color: #22d3ee; }
+.edu-ico { font-size: 28px; flex-shrink: 0; }
+.edu-deg { font-family: Georgia, serif; font-size: 17px; font-weight: 700; color: #e8e8f0; margin-bottom: 3px; }
+.edu-sch { color: #22d3ee; font-size: 12px; margin-bottom: 3px; }
+.edu-st { font-size: 10px; color: #6b6b88; letter-spacing: 1.5px; text-transform: uppercase; }
+.lang-row { display: flex; gap: 2px; flex-wrap: wrap; }
+.lang {
+  background: #0d1526; border: 1px solid #1a2744; padding: 14px 28px;
+  font-family: Georgia, serif; font-size: 15px; font-weight: 700; color: #e8e8f0; transition: all 0.2s;
+}
+.lang:hover { border-color: #22d3ee; color: #22d3ee; }
+.contact-wrap { background: #0d1526; border-top: 1px solid #1a2744; border-bottom: 1px solid #1a2744; text-align: center; padding: 100px 48px; }
+.contact-sub { font-size: 10px; color: #6b6b88; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
+.contact-title { font-family: Georgia, serif; font-size: clamp(28px,4vw,48px); font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; }
+.contact-desc { color: #6b6b88; font-size: 13px; max-width: 480px; margin: 0 auto 32px; }
+.contact-email { font-family: Georgia, serif; font-size: clamp(18px,2.5vw,36px); font-weight: 900; color: #e8e8f0; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.2s; }
+.contact-email:hover { color: #22d3ee; }
+.contact-phone { font-size: 13px; color: #6b6b88; }
+footer { padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1a2744; color: #6b6b88; font-size: 11px; }
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 12px; }
+  .nav-btn { font-size: 9px; letter-spacing: 1px; }
+  section, .hero { padding-left: 20px; padding-right: 20px; }
+  .hero { padding-top: 100px; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .divider { margin: 0 20px; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="nav-logo" onclick="goTo('hero')">SS/</button>
+  <div class="nav-links">
+    <button class="nav-btn" onclick="goTo('about')">About</button>
+    <button class="nav-btn" onclick="goTo('skills')">Skills</button>
+    <button class="nav-btn" onclick="goTo('experience')">Work</button>
+    <button class="nav-btn" onclick="goTo('projects')">Projects</button>
+    <button class="nav-btn" onclick="goTo('education')">Education</button>
+    <button class="nav-btn" onclick="goTo('contact')">Contact</button>
+  </div>
+</nav>
+
+<div class="hero" id="hero">
+  <p class="hero-tag">// Available for opportunities</p>
+  <h1 class="hero-name">Shivam<br/><span>Sharma</span></h1>
+  <p class="hero-role">Technical Operations &amp; Automation Specialist</p>
+  <div class="hero-meta">
+    <span>✉ <a href="mailto:shivamsharma99151@gmail.com">shivamsharma99151@gmail.com</a></span>
+    <span>✆ +91 99151 69378</span>
+    <span>📍 Fazilka, Punjab, India</span>
+  </div>
+  <div class="hero-btns">
+    <button class="btn btn-primary" onclick="goTo('projects')">View Projects</button>
+    <button class="btn btn-ghost" onclick="goTo('contact')">Get In Touch</button>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="about">
+  <div class="sec-label">01 — About</div>
+  <h2 class="sec-title">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Technical Operations &amp; Automation Specialist</strong> with ~1 year 2 months of hands-on experience at Math Made Easy, Fazilka.</p>
+      <p>Proficient in <strong>Google Sheets automation, API integration, data management, and workflow automation</strong> — building practical tools that remove manual bottlenecks.</p>
+      <p>I build using <strong>Python, JavaScript, HTML &amp; CSS</strong> with a focus on automating business processes and streamlining operations.</p>
+      <p>Currently in my <strong>2nd year of BCA</strong> at National Degree College, Fazilka — passionate about backend systems that scale.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-n">1.2</div><div class="stat-l">Years Exp.</div></div>
+      <div class="stat"><div class="stat-n">5+</div><div class="stat-l">Projects</div></div>
+      <div class="stat"><div class="stat-n">5</div><div class="stat-l">Tech Skills</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Bugs Fixed</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="sec-label">02 — Skills</div>
+  <h2 class="sec-title">What I Work With</h2>
+  <div class="skills-grid">
+    <div class="skill"><div class="skill-ico">🐍</div><div class="skill-n">Python</div><p class="skill-d">Scripts, automation logic, API calls, and custom backend tooling.</p><div class="tags"><span class="tag">Scripting</span><span class="tag">Automation</span><span class="tag">APIs</span></div></div>
+    <div class="skill"><div class="skill-ico">⚡</div><div class="skill-n">JavaScript</div><p class="skill-d">Frontend interactivity, Node utilities, and automation workflows.</p><div class="tags"><span class="tag">Node.js</span><span class="tag">Async</span><span class="tag">DOM</span></div></div>
+    <div class="skill"><div class="skill-ico">🌐</div><div class="skill-n">HTML &amp; CSS</div><p class="skill-d">Structured, styled websites and internal tools with modern layouts.</p><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Responsive</span></div></div>
+    <div class="skill"><div class="skill-ico">🐳</div><div class="skill-n">Docker</div><p class="skill-d">Containerizing websites and APIs for consistent local deployment.</p><div class="tags"><span class="tag">Containers</span><span class="tag">Docker Desktop</span></div></div>
+    <div class="skill"><div class="skill-ico">📊</div><div class="skill-n">Google Sheets</div><p class="skill-d">Advanced automation, DB management, real-time API sync, reporting.</p><div class="tags"><span class="tag">Sheets API</span><span class="tag">Apps Script</span></div></div>
+    <div class="skill"><div class="skill-ico">🔗</div><div class="skill-n">API Integration</div><p class="skill-d">Connecting third-party platforms and automating data flow between systems.</p><div class="tags"><span class="tag">REST</span><span class="tag">Webhooks</span><span class="tag">3rd Party</span></div></div>
+    <div class="skill"><div class="skill-ico">⚙️</div><div class="skill-n">Workflow Automation</div><p class="skill-d">End-to-end automation systems eliminating repetitive manual tasks.</p><div class="tags"><span class="tag">Business Ops</span><span class="tag">Pipelines</span></div></div>
+    <div class="skill"><div class="skill-ico">📞</div><div class="skill-n">Callyzer &amp; Comms</div><p class="skill-d">Call recording management and bulk WhatsApp/messaging campaigns.</p><div class="tags"><span class="tag">Callyzer</span><span class="tag">Bulk Messaging</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience">
+  <div class="sec-label">03 — Experience</div>
+  <h2 class="sec-title">Where I've Worked</h2>
+  <div class="exp">
+    <div class="exp-co">Math Made Easy</div>
+    <div class="exp-role">Technical Operations Executive</div>
+    <div class="exp-date">January 2025 – March 2026 · ~1 Year 2 Months · Fazilka, Punjab</div>
+    <ul class="exp-list">
+      <li>Managed Google Sheets databases with API integrations for real-time data sync and automated reporting.</li>
+      <li>Managed multi-channel student communications — study materials, exam prep, and government job guidance.</li>
+      <li>Conducted bulk broadcast messaging campaigns for course enrollments and student support.</li>
+      <li>Handled call recording management using Callyzer, indexed in Google Sheets for easy retrieval.</li>
+      <li>Developed and maintained a Zoom Attendance Manager — automated Google Sheets tool for online class attendance.</li>
+      <li>Built automation workflows in Google Sheets to eliminate repetitive manual tasks.</li>
+      <li>Created document converter utilities: Word-to-PPT, App Form-to-Print Form, App Form-to-Book Form.</li>
+      <li>Developed and hosted websites and APIs using Docker Desktop in containerized environments.</li>
+      <li>Integrated third-party APIs to automate data flow between systems.</li>
+      <li>Wrote Python, JavaScript, HTML &amp; CSS to build custom project solutions.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects">
+  <div class="sec-label">04 — Projects</div>
+  <h2 class="sec-title">Things I've Built</h2>
+  <div class="proj-grid">
+    <div class="proj"><div class="proj-n-bg">01</div><div class="proj-n">Zoom Attendance Manager</div><p class="proj-d">Fully automated attendance tracking in Google Sheets integrated with Zoom API. Captured and recorded student attendance for online classes, reducing manual effort and improving accuracy.</p><div class="tags"><span class="tag">Python</span><span class="tag">Zoom API</span><span class="tag">Google Sheets</span></div></div>
+    <div class="proj"><div class="proj-n-bg">02</div><div class="proj-n">Student Broadcast System</div><p class="proj-d">Comprehensive messaging system delivering targeted study materials, exam prep, and promotional campaigns via bulk broadcast to students preparing for competitive exams.</p><div class="tags"><span class="tag">WhatsApp API</span><span class="tag">Bulk Messaging</span><span class="tag">Automation</span></div></div>
+    <div class="proj"><div class="proj-n-bg">03</div><div class="proj-n">Call Recording Management</div><p class="proj-d">Structured system using Callyzer with all recordings indexed and stored in Google Sheets for easy search, retrieval, and reporting.</p><div class="tags"><span class="tag">Callyzer</span><span class="tag">Google Sheets</span><span class="tag">Data Mgmt</span></div></div>
+    <div class="proj"><div class="proj-n-bg">04</div><div class="proj-n">Document Conversion Utilities</div><p class="proj-d">Suite of converters: Word-to-PPT, App Form-to-Print Form, and App Form-to-Book Form — streamlining internal document workflows significantly.</p><div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">File Processing</span></div></div>
+    <div class="proj"><div class="proj-n-bg">05</div><div class="proj-n">Website &amp; API (Docker)</div><p class="proj-d">Deployed websites and RESTful APIs in a containerized environment using Docker Desktop for consistent development and testing workflows.</p><div class="tags"><span class="tag">Docker</span><span class="tag">REST API</span><span class="tag">HTML/CSS</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education">
+  <div class="sec-label">05 — Education</div>
+  <h2 class="sec-title">Academic Background</h2>
+  <div class="edu-stack">
+    <div class="edu"><div class="edu-ico">🎓</div><div><div class="edu-deg">Bachelor of Computer Applications (BCA)</div><div class="edu-sch">Punjab University / National Degree College, Fazilka</div><div class="edu-st">2nd Year · Currently Pursuing · Expected 2026</div></div></div>
+    <div class="edu"><div class="edu-ico">📚</div><div><div class="edu-deg">12th Standard (Senior Secondary)</div><div class="edu-sch">Holy Heart Day Boarding Senior Secondary Public School, Fazilka</div><div class="edu-st">Completed</div></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section style="padding-top:56px;padding-bottom:56px;">
+  <div class="sec-label">06 — Languages</div>
+  <div class="lang-row">
+    <div class="lang">Hindi</div>
+    <div class="lang">Punjabi</div>
+    <div class="lang">English</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="contact-wrap" id="contact">
+  <p class="contact-sub">07 — Let's work together</p>
+  <h2 class="contact-title">Open to Opportunities</h2>
+  <p class="contact-desc">Looking for a <strong style="color:#22d3ee;">Backend</strong> and <strong style="color:#22d3ee;">Web Developer</strong> role where I can contribute and grow.</p>
+  <a href="mailto:shivamsharma99151@gmail.com" class="contact-email">shivamsharma99151@gmail.com</a>
+  <p class="contact-phone">+91 99151 69378 · Fazilka, Punjab, India</p>
+</div>
+
+<footer>
+  <span>© 2026 Shivam Sharma</span>
+  <span>Fazilka, Punjab · India</span>
+</footer>
+
+<script>
+function goTo(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var navH = document.querySelector('nav').offsetHeight;
+  var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 16;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
+var navBtns = document.querySelectorAll('.nav-btn');
+var allSections = ['hero','about','skills','experience','projects','education','contact'];
+
+window.addEventListener('scroll', function() {
+  var scrollY = window.scrollY + 120;
+  var current = 'hero';
+  allSections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) current = id;
+  });
+  navBtns.forEach(function(btn) {
+    var id = btn.getAttribute('onclick').replace("goTo('","").replace("')","");
+    btn.classList.toggle('active', id === current);
+  });
+});
+</script>
+</body>
+</html>
